@@ -1,0 +1,17 @@
+{
+    "name": "tobbe/widget-includer",
+    "module": "tobbe/widget-includer",
+    "version": "0.1",
+    "type": "pagekit-extension",
+    "title": "Include widgets",
+    "description": "Include widgets anywhere in your content.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobbe",
+            "homepage": "https://github.com/tobbexiv/pagekit-widget-includer"
+        }
+    ],
+    "extra": {
+    }
+}

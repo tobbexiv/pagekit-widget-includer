@@ -21,13 +21,12 @@ class WidgetIncluderModule extends Module
 
     public function renderWidget(App $app, $widget_id, $options = [], $view = null)
     {
-
         // get user context
         $user = $app->user();
 
         /** @var Widget $widget */
         if (!$widget = Widget::where([
-            'id' => $widget_id,
+            'id' => $widget_id
         ])->first()) {
             throw new App\Exception('Widget not found', 404);
         }
@@ -37,8 +36,9 @@ class WidgetIncluderModule extends Module
 
         // check permissions
         if ($widget->hasAccess($user) !== true
-            || $type === false
-            || $widget->status !== 1) {
+            || $type === null
+            || $widget->status !== 1
+        ) {
 
             return '';
 

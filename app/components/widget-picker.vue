@@ -53,7 +53,7 @@
 
         data: function () {
             return {
-                widget: { id: 0, data: { hideTitle: 0, titleSize: 0, title: '' } }
+                widget: { id: -1, data: { hideTitle: false, titleSize: 4, title: '' } }
             }
         },
 

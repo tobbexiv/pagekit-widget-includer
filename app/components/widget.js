@@ -17,7 +17,7 @@ module.exports = {
 
         editor.addButton('widget', {
             title: 'Widget',
-            label: '<i class="uk-icon-gears"></i>' // uk-icon-puzzle-piece or uk-icon-gear or uk-icon-gears or something else?
+            label: '<i class="uk-icon-gears"></i>'
         });
 
         editor.options.toolbar.push('widget');
@@ -29,7 +29,8 @@ module.exports = {
                 }));
             })
             .on('render', function () {
-                vm.widgets = editor.replaceInPreview(/\(widget\)\{(.+?)}/gi, vm.replaceInPreview);
+                // No recursion as it is not supported in JS -> nested JSON not possible.
+                vm.widgets = editor.replaceInPreview(/\(widget\)(\{.+?\})/gi, vm.replaceInPreview);
             })
             .on('renderLate', function () {
                 while (vm.$children.length) {
@@ -68,51 +69,53 @@ module.exports = {
                 .$appendTo('body')
                 .$on('select', function (widget) {
                     var content;
-                    var options;
+                    var options = {};
                     
-                    options = '"id":"' + widget.id + '"';
+                    options.id = parseInt(widget.id);
                     
-                    if(widget.data.hideTitle == 1) {
-                        options += ', "hideTitle":"1"';
+                    if(widget.data.hideTitle === true) {
+                        options.hideTitle = true;
                     }
                     
-                    if(widget.data.titleSize != 4) {
-                        options += ', "titleSize":"' + widget.data.titleSize + '"';
+                    if(parseInt(widget.data.titleSize) > 0 && parseInt(widget.data.titleSize) < 10 && parseInt(widget.data.titleSize) !== 4) {
+                        options.titleSize = parseInt(widget.data.titleSize);
                     }
                     
-                    if(widget.data.title) {
-                        options += ', "title":"' + widget.data.title + '"';
+                    if(!!widget.data.title === true) {
+                        options.title = widget.data.title;
                     }
 
-                    content = '(widget){' + options + '}';
+                    content = '(widget)' + JSON.stringify(options);
 
                     widget.replace(content);
                 });
         },
 
         replaceInPreview: function (data, index) {
-        	console.log(data);
-            var id        = /"id":[\s]*"([1-9]?[0-9]*)"/gi.exec(data.matches[0]),
-                hideTitle = /"hideTitle":[\s]*"([01])"/gi.exec(data.matches[0]),
-                titleSize = /"titleSize":[\s]*"([1-9]?[0-9]*)"/gi.exec(data.matches[0]),
-                title     = /"title":[\s]*"([^"]*)"/gi.exec(data.matches[0]);
+            var parsed = {};
             
-            if(!!id === true) {
-                data.id = id[1];
+            try {
+                parsed = JSON.parse(data.matches[1]);
+            } catch (e) {
+                // Parsing fails -> just assume nothing was entered and keep the default values.
+            }
+            
+            if(parseInt(parsed.id) > 0) {
+                data.id = parseInt(parsed.id);
             }
             
             data.data = {};
             
-            if(!!hideTitle === true) {
-                data.data.hideTitle = hideTitle[1];
+            if(parsed.hideTitle === true) {
+                data.data.hideTitle = true;
             }
             
-            if(!!titleSize === true) {
-                data.data.titleSize = titleSize[1];
+            if(parseInt(parsed.titleSize) > 0 && parseInt(parsed.titleSize) < 10) {
+                data.data.titleSize = parseInt(parsed.titleSize);
             }
             
-            if(!!title === true) {
-                data.data.title = title[1];
+            if(!!parsed.title === true) {
+                data.data.title = parsed.title;
             }
             
             return '<widget-preview index="' + index + '"></widget-preview>';

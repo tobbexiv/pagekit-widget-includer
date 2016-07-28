@@ -39,14 +39,12 @@ class WidgetIncluderModule extends Module
             || $type === null
             || $widget->status !== 1
         ) {
-
             return '';
-
         }
 
         // default configuration
         $hideTitle = false;
-        $titleSize = '4';
+        $titleSize = 4;
         $title     = $widget->title;
 
         $content = '';
@@ -55,11 +53,13 @@ class WidgetIncluderModule extends Module
         foreach ($options as $key => $value) {
             switch ($key) {
                 case 'hideTitle':
-                    $hideTitle = ($value == 1);
+                    $hideTitle = ($value === true);
                     break;
 
                 case 'titleSize':
-                    $titleSize = $value;
+                    if($value > 0 && $value < 10) {
+                        $titleSize = $value;
+                    }
                     break;
 
                 case 'title':

@@ -6,7 +6,6 @@ module.exports = [
         },
         output: {
             filename: "./app/bundle/[name].js",
-            library: "Editor"
         },
         module: {
             loaders: [

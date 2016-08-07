@@ -57,7 +57,7 @@ class WidgetIncluderModule extends Module
                     break;
 
                 case 'titleSize':
-                    if($value > 0 && $value < 10) {
+                    if($value > 0 && $value < 6) {
                         $titleSize = $value;
                     }
                     break;

@@ -18,18 +18,25 @@
                 <div class="uk-form-row">
                     <label for="form-widget-hideTitle" class="uk-form-label">{{ 'Hide Title' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input id="form-widget-hideTitle" class="uk-width-1-1" type="text" v-model="widget.data.hideTitle">
+                        <input type="checkbox" id="form-widget-hideTitle" v-model="widget.data.hideTitle">
                     </div>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-form-row" v-show="!widget.data.hideTitle">
                     <label for="form-widget-titleSize" class="uk-form-label">{{ 'Title Size' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input id="form-widget-titleSize" class="uk-width-1-1" v-model="widget.data.titleSize"></input>
+                        <select id="form-widget-titleSize" class="uk-width-1-1" v-model="widget.data.titleSize">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
                     </div>
                 </div>
                 
-                <div class="uk-form-row">
+                <div class="uk-form-row" v-show="!widget.data.hideTitle">
                     <label for="form-widget-title" class="uk-form-label">{{ 'Title' | trans }}</label>
                     <div class="uk-form-controls">
                         <input id="form-widget-title" class="uk-width-1-1" v-model="widget.data.title"></input>
@@ -53,7 +60,7 @@
 
         data: function () {
             return {
-                widget: { id: -1, data: { hideTitle: false, titleSize: 4, title: '' } }
+                widget: { id: -1, data: { hideTitle: false, titleSize: "4", title: '' } }
             }
         },
 

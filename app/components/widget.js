@@ -17,7 +17,7 @@ module.exports = {
 
         editor.addButton('widget', {
             title: 'Widget',
-            label: '<i class="uk-icon-gears"></i>'
+            label: '<i class="uk-icon-puzzle-piece"></i>'
         });
 
         editor.options.toolbar.push('widget');
@@ -72,13 +72,13 @@ module.exports = {
                     var options = {};
                     
                     options.id = parseInt(widget.id);
-                    
+                                    
                     if(widget.data.hideTitle === true) {
                         options.hideTitle = true;
                     }
                     
-                    if(parseInt(widget.data.titleSize) > 0 && parseInt(widget.data.titleSize) < 10 && parseInt(widget.data.titleSize) !== 4) {
-                        options.titleSize = parseInt(widget.data.titleSize);
+                    if(parseInt(widget.data.titleSize) > 0 && parseInt(widget.data.titleSize) < 6 && parseInt(widget.data.titleSize) !== 4) {
+                        options.titleSize = parseInt(widget.data.titleSize) + '';
                     }
                     
                     if(!!widget.data.title === true) {

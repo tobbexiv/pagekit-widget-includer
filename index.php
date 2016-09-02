@@ -11,16 +11,33 @@ return [
     'autoload' => [
         'Tobbe\\WidgetIncluder\\' => 'src'
     ],
-    
+
+    'permissions' => [
+        'widgetincluder: use editor plugin' => [
+            'title' => _('Use the widget includer editor plugin')
+        ]
+    ],
+
+    'routes' => [
+
+        '/api/widgetincluder' => [
+            'name' => '@widgetincluder/api',
+            'controller' => [
+                'Tobbe\\WidgetIncluder\\Controller\\WidgetApiController'
+            ]
+        ]
+
+    ],
+
     'resources' => [
         'tobbe/widget-includer:' => ''
     ],
     
     'events' => [
-        'view.scripts' => function ($event, $scripts) {
-//             if ($app['user']->hasAccess('')) {
+        'view.scripts' => function ($event, $scripts) use ($app) {
+            if ($app['user']->hasAccess('widgetincluder: use editor plugin')) {
                 $scripts->register('editor-widget', 'tobbe/widget-includer:app/bundle/editor-widget.js', ['~editor']);
-//             }
+            }
             
         }
     ]

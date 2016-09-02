@@ -31,7 +31,7 @@ class WidgetPlugin implements EventSubscriberInterface
     public function applyPlugin(array $options)
     {
         if (! isset($options['id'])) {
-            return;
+            return '';
         }
         
         $widget = App::module('tobbe/widget-includer');
@@ -40,7 +40,7 @@ class WidgetPlugin implements EventSubscriberInterface
         unset($options['id']);
         
         try {
-            return $widget->renderWidget($app, $widget_id, $options);
+            return $widget->renderWidget($app, $widget_id, $options)['content'];
         } catch (App\Exception $e) {
             return $e->getMessage();
         }

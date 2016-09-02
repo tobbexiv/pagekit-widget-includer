@@ -11,7 +11,12 @@
                 <div class="uk-form-row">
                     <label for="form-widget-id" class="uk-form-label">{{ 'Id' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input id="form-widget-id" class="uk-width-1-1" type="text" v-model="widget.id">
+                        <select id="form-widget-id" class="uk-width-1-1" v-model="widget.id">
+                            <option v-for="w in widgets" :value="w.id" v-bind:class="{ 'uk-text-muted': w.disabled }">{{ w.title }}</option>
+                        </select>
+                        <p v-show="isDeactivated" class="uk-form-help-block">
+                            {{ 'This widget is disabled. No one will be able to see it.' | trans }}
+                        </p>
                     </div>
                 </div>
 
@@ -60,12 +65,31 @@
 
         data: function () {
             return {
+                widgets: [],
                 widget: { id: -1, data: { hideTitle: false, titleSize: "4", title: '' } }
             }
         },
 
+        created: function () {
+            this.$resource('api/widgetincluder/widget').get().then(function (result) {
+                this.widgets = result.data;
+
+                if (result.data.length && this.widget.id < 0) {
+                    this.widget.id = result.data[0].id;
+                }
+            });
+        },
+
         ready: function () {
             this.$refs.modal.open();
+        },
+        
+        computed: {
+
+            isDeactivated: function () {
+                return this.widgets.find(function(elem) { return this.widget.id == elem.id }, this).disabled;
+            }
+
         },
 
         methods: {

@@ -1,6 +1,6 @@
 <template>
 
-    Widget placeholder.
+    {{ 'Widget placeholder. Direct preview not yet implemented.' }}
 
 </template>
 

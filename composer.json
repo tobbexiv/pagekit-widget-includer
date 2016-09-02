@@ -1,7 +1,7 @@
 {
     "name": "tobbe/widget-includer",
     "module": "tobbe/widget-includer",
-    "version": "0.1",
+    "version": "0.9.0",
     "type": "pagekit-extension",
     "title": "Include widgets",
     "description": "Include widgets anywhere in your content.",

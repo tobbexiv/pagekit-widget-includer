@@ -63,7 +63,7 @@
             },
 
             calculatedContent: function() {
-                var alert = {
+                var alertSettings = {
                     type: 'uk-alert-warning',
                     icon: 'uk-icon-warning',
                     content: ''
@@ -71,43 +71,45 @@
 
                 switch (this.widgetState) {
                     case this.WIDGET_STATE.ERROR:
-                        alert.type = 'uk-alert-danger';
-                        alert.content = this.$trans('There was an error loading the widget with id %widgetId%!', { widgetId: this.widget.id });
+                        alertSettings.type = 'uk-alert-danger';
+                        alertSettings.content = this.$trans('There was an error loading the widget!');
                         break;
 
                     case this.WIDGET_STATE.LOADING:
-                        alert.type = '';
-                        alert.icon = 'uk-icon-spinner';
-                        alert.content = this.$trans('Loading widget ...');
+                        alertSettings.type = '';
+                        alertSettings.icon = 'uk-icon-spinner';
+                        alertSettings.content = this.$trans('Loading widget ...');
                         break;
 
                     case this.WIDGET_STATE.NOT_EXISTING:
-                        alert.type = 'uk-alert-danger';
-                        alert.content = this.$trans('Widget with id %widgetId% does not exist!', { widgetId: this.widget.id });
+                        alertSettings.type = 'uk-alert-danger';
+                        alertSettings.content = this.$trans('Widget does not exist!');
                         break;
 
                     case this.WIDGET_STATE.ACCESS_DENIED:
-                        alert.content = this.$trans('You are not authorized to see widget with id %widgetId%!', { widgetId: this.widget.id });
+                        alertSettings.content = this.$trans('You are not authorized to see this widget!');
                         break;
 
                     case this.WIDGET_STATE.DISABLED:
-                        alert.content = this.$trans('Widget with id %widgetId% is disabled!', { widgetId: this.widget.id });
+                        alertSettings.content = this.$trans('Widget is disabled!');
                         break;
 
                     case this.WIDGET_STATE.RENDER_PLACEHOLDER:
-                        alert.type = 'uk-alert-success';
-                        alert.icon = 'uk-icon-puzzle-piece';
-                        alert.content = this.$trans('Placeholder for widget with id ' + this.widget.id + '.', { widgetId: this.widget.id });
+                        alertSettings.type = 'uk-alert-success';
+                        alertSettings.icon = 'uk-icon-puzzle-piece';
+                        alertSettings.content = this.$trans('Widget placeholder.');
                         break;
 
                     default:
                         return this.content;
                 };
 
+                alertSettings.content += '<br><span class="uk-icon-justify"></span> ' + this.$trans('Widget id: %widgetId%', { widgetId: this.widget.id });
+
                 return '<div class="uk-alert %alert_class%"><span class="%icon_class%"></span> %content%</div>'
-                            .replace('%alert_class%', alert.type)
-                            .replace('%icon_class%', alert.icon + (alert.icon === 'uk-icon-spinner' ? ' uk-icon-spin' : ''))
-                            .replace('%content%', alert.content);
+                            .replace('%alert_class%', alertSettings.type)
+                            .replace('%icon_class%', 'uk-icon-justify ' + alertSettings.icon + (alertSettings.icon === 'uk-icon-spinner' ? ' uk-icon-spin' : ''))
+                            .replace('%content%', alertSettings.content);
             }
 
         }

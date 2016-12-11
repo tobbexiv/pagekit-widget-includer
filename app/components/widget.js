@@ -73,6 +73,10 @@ module.exports = {
 
                     options.id = parseInt(widget.id);
 
+                    if(!!widget.data.comment === true) {
+                        options.comment = widget.data.comment;
+                    }
+
                     if(widget.data.hideTitle === true) {
                         options.hideTitle = true;
                     }
@@ -120,6 +124,10 @@ module.exports = {
 
             if(!!parsed.title === true) {
                 data.data.title = parsed.title;
+            }
+
+            if(!!parsed.comment === true) {
+                data.data.comment = parsed.comment;
             }
 
             data.data.renderPlaceholder = parsed.renderPlaceholder !== false;

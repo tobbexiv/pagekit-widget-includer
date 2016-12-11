@@ -106,6 +106,10 @@
 
                 alertSettings.content += '<br><span class="uk-icon-justify"></span> ' + this.$trans('Widget id: %widgetId%', { widgetId: this.widget.id });
 
+                if(!!this.widget.data.comment === true) {
+                    alertSettings.content += '<br><span class="uk-icon-justify"></span> ' + this.$trans('Widget comment: %comment%', { comment: this.widget.data.comment });
+                }
+
                 return '<div class="uk-alert %alert_class%"><span class="%icon_class%"></span> %content%</div>'
                             .replace('%alert_class%', alertSettings.type)
                             .replace('%icon_class%', 'uk-icon-justify ' + alertSettings.icon + (alertSettings.icon === 'uk-icon-spinner' ? ' uk-icon-spin' : ''))

@@ -32,6 +32,16 @@
                             <label for="form-widget-renderPlaceholder">{{ 'Render placeholder instead of content in preview' | trans }}</label>
                         </div>
                     </div>
+
+                    <div class="uk-form-row">
+                        <label for="form-widget-comment" class="uk-form-label">{{ 'Comment' | trans }}</label>
+                        <div class="uk-form-controls">
+                            <input id="form-widget-comment" class="uk-width-1-1" v-model="widget.data.comment"></input>
+                            <p class="uk-form-help-block">
+                                {{ 'This comment is displayed in the editor, but not evaluated by the widget. So you can enter information which helps you to identify the widget.' | trans }}
+                            </p>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <fieldset data-uk-margin>
@@ -83,7 +93,7 @@
         data: function () {
             return {
                 widgets: [],
-                widget: { id: -1, data: { hideTitle: false, titleSize: "4", title: '', renderPlaceholder: true } }
+                widget: { id: -1, data: { hideTitle: false, titleSize: "4", title: '', renderPlaceholder: true, comment: '' } }
             }
         },
 

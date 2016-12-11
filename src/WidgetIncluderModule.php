@@ -23,6 +23,7 @@ class WidgetIncluderModule extends Module
     {
         // defaults
         $content = '';
+        $widgetExists = true;
         $hasAccess = true;
         $disabled = false;
 
@@ -33,56 +34,58 @@ class WidgetIncluderModule extends Module
         if (!$widget = Widget::where([
             'id' => $widget_id
         ])->first()) {
-            throw new App\Exception('Widget not found', 404);
+            $widgetExists = false;
         }
 
-        // widget type
-        $type = App::widget($widget->type);
+        if ($widgetExists === true) {
+            // widget type
+            $type = App::widget($widget->type);
 
-        // check permissions
-        if ($widget->hasAccess($user) !== true) {
-            $hasAccess = false;
-        } else if ($widget->status !== 1) {
-            $disabled = true;
-        } else if ($type === null) {
-            $content = '';
-        } else {
-            // default configuration
-            $hideTitle = false;
-            $titleSize = 4;
-            $title     = $widget->title;
+            // check permissions
+            if ($widget->hasAccess($user) !== true) {
+                $hasAccess = false;
+            } else if ($widget->status !== 1) {
+                $disabled = true;
+            } else if ($type === null) {
+                $content = '';
+            } else {
+                // default configuration
+                $hideTitle = false;
+                $titleSize = 4;
+                $title     = $widget->title;
 
-            // overwrite with options
-            foreach ($options as $key => $value) {
-                switch ($key) {
-                    case 'hideTitle':
-                        $hideTitle = ($value === true);
-                        break;
+                // overwrite with options
+                foreach ($options as $key => $value) {
+                    switch ($key) {
+                        case 'hideTitle':
+                            $hideTitle = ($value === true);
+                            break;
 
-                    case 'titleSize':
-                        if($value > 0 && $value < 6) {
-                            $titleSize = $value;
-                        }
-                        break;
+                        case 'titleSize':
+                            if($value > 0 && $value < 6) {
+                                $titleSize = $value;
+                            }
+                            break;
 
-                    case 'title':
-                        $title = $value;
-                        break;
-                };
+                        case 'title':
+                            $title = $value;
+                            break;
+                    };
+                }
+
+                // create title tag
+                if ($hideTitle == false) {
+                    $content .= '<h' . $titleSize . '>' . $title . '</h' . $titleSize . '>';
+                }
+
+                /*
+                 * Markdown should be already replaced. But line breaks from e.g. menu
+                 * break the display as soon as there is a title. So we remove them.
+                 */
+                $content .= preg_replace('/\n/', '', $type->render($widget));
             }
-
-            // create title tag
-            if ($hideTitle == false) {
-                $content .= '<h' . $titleSize . '>' . $title . '</h' . $titleSize . '>';
-            }
-
-            /*
-             * Markdown should be already replaced. But line breaks from e.g. menu
-             * break the display as soon as there is a title. So we remove them.
-             */
-            $content .= preg_replace('/\n/', '', $type->render($widget));
         }
 
-        return compact('content', 'hasAccess', 'disabled');
+        return compact('content', 'hasAccess', 'disabled', 'widgetExists');
     }
 }

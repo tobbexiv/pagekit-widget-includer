@@ -39,11 +39,7 @@ class WidgetPlugin implements EventSubscriberInterface
         $widget_id = $options['id'];
         unset($options['id']);
         
-        try {
-            return $widget->renderWidget($app, $widget_id, $options)['content'];
-        } catch (App\Exception $e) {
-            return $e->getMessage();
-        }
+        return $widget->renderWidget($app, $widget_id, $options)['content'];
     }
 
     /**

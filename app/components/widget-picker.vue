@@ -21,6 +21,13 @@
                 </div>
 
                 <div class="uk-form-row">
+                    <label for="form-widget-renderPlaceholder" class="uk-form-label">{{ 'Render placeholder instead of content in preview' | trans }}</label>
+                    <div class="uk-form-controls">
+                        <input type="checkbox" id="form-widget-renderPlaceholder" v-model="widget.data.renderPlaceholder">
+                    </div>
+                </div>
+
+                <div class="uk-form-row">
                     <label for="form-widget-hideTitle" class="uk-form-label">{{ 'Hide Title' | trans }}</label>
                     <div class="uk-form-controls">
                         <input type="checkbox" id="form-widget-hideTitle" v-model="widget.data.hideTitle">
@@ -66,7 +73,7 @@
         data: function () {
             return {
                 widgets: [],
-                widget: { id: -1, data: { hideTitle: false, titleSize: "4", title: '' } }
+                widget: { id: -1, data: { hideTitle: false, titleSize: "4", title: '', renderPlaceholder: true } }
             }
         },
 

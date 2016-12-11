@@ -70,19 +70,23 @@ module.exports = {
                 .$on('select', function (widget) {
                     var content;
                     var options = {};
-                    
+
                     options.id = parseInt(widget.id);
-                                    
+
                     if(widget.data.hideTitle === true) {
                         options.hideTitle = true;
                     }
-                    
+
                     if(parseInt(widget.data.titleSize) > 0 && parseInt(widget.data.titleSize) < 6 && parseInt(widget.data.titleSize) !== 4) {
                         options.titleSize = parseInt(widget.data.titleSize) + '';
                     }
-                    
+
                     if(!!widget.data.title === true) {
                         options.title = widget.data.title;
+                    }
+
+                    if(widget.data.renderPlaceholder === false) {
+                        options.renderPlaceholder = false;
                     }
 
                     content = '(widget)' + JSON.stringify(options);
@@ -93,31 +97,33 @@ module.exports = {
 
         replaceInPreview: function (data, index) {
             var parsed = {};
-            
+
             try {
                 parsed = JSON.parse(data.matches[1]);
             } catch (e) {
                 // Parsing fails -> just assume nothing was entered and keep the default values.
             }
-            
+
             if(parseInt(parsed.id) > 0) {
                 data.id = parseInt(parsed.id);
             }
-            
+
             data.data = {};
-            
+
             if(parsed.hideTitle === true) {
                 data.data.hideTitle = true;
             }
-            
+
             if(parseInt(parsed.titleSize) > 0 && parseInt(parsed.titleSize) < 10) {
                 data.data.titleSize = parseInt(parsed.titleSize);
             }
-            
+
             if(!!parsed.title === true) {
                 data.data.title = parsed.title;
             }
-            
+
+            data.data.renderPlaceholder = parsed.renderPlaceholder !== false;
+
             return '<widget-preview index="' + index + '"></widget-preview>';
         }
 
@@ -126,7 +132,7 @@ module.exports = {
     components: {
         'widget-preview': require('./widget-preview.vue')
     },
-    
+
     utils: {
         'widget-picker': Vue.extend(require('./widget-picker.vue'))
     }

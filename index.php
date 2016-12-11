@@ -35,8 +35,12 @@ return [
     
     'events' => [
         'view.scripts' => function ($event, $scripts) use ($app) {
+
+            $packageVersion = $app->config('system')->get('packages.tobbe/widget-includer');
+            $packageVersionHash = substr(sha1($packageVersion), 0, 4);
+
             if ($app['user']->hasAccess('widgetincluder: use editor plugin')) {
-                $scripts->register('editor-widget', 'tobbe/widget-includer:app/bundle/editor-widget.js', ['~editor']);
+                $scripts->register('editor-widget', 'tobbe/widget-includer:app/bundle/editor-widget.js', ['~editor'], ['version' => $packageVersionHash]);
             }
             
         }

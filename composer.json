@@ -14,5 +14,12 @@
         }
     ],
     "extra": {
+        "icon": "icon.png",
+        "image": "image.png"
+    },
+    "archive": {
+        "exclude": [
+            "node_modules"
+        ]
     }
 }

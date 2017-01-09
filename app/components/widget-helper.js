@@ -67,7 +67,7 @@ module.exports = {
                 widgetInfo.comment = pickerSelection.data.comment;
             }
 
-            if(widget.data.hideTitle === true) {
+            if(pickerSelection.data.hideTitle === true) {
                 widgetInfo.hideTitle = true;
             }
 

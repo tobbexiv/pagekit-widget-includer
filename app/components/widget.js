@@ -56,7 +56,7 @@ module.exports = {
     methods: {
 
         openModal: function (widget) {
-            var editor = this.$parent.editor, cursor = editor.editor.getCursor();
+            var vm = this, editor = this.$parent.editor, cursor = editor.editor.getCursor();
 
             if (!widget) {
                 widget = {
@@ -76,7 +76,7 @@ module.exports = {
                 .$on('select', function (widget) {
                     var content, widgetInfo;
 
-                    widgetInfo = this.helper.widgetInfoFromPickerSelection(widget)
+                    widgetInfo = vm.helper.widgetInfoFromPickerSelection(widget)
 
                     content = '(widget)' + JSON.stringify(widgetInfo);
 

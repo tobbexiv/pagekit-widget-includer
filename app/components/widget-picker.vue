@@ -114,7 +114,11 @@
         computed: {
 
             isDeactivated: function () {
-                return this.widgets.find(function(elem) { return this.widget.id == elem.id }, this).disabled;
+                if(this.widgets.length > 0) {
+                    return this.widgets.find(function(elem) { return this.widget.id == elem.id }, this).disabled;
+                }
+
+                return false;
             }
 
         },

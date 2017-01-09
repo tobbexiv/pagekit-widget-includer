@@ -41,8 +41,12 @@ return [
 
             if ($app['user']->hasAccess('widgetincluder: use editor plugin')) {
                 $scripts->register('editor-widget', 'tobbe/widget-includer:app/bundle/editor-widget.js', ['~editor'], ['version' => $packageVersionHash]);
+
+                if ($app->module('tinymce')) {
+                    $scripts->register('editor-widget-tinymce', 'tobbe/widget-includer:app/bundle/editor-widget-tinymce.js', ['~editor-widget', '~tinymce-script'], ['version' => $packageVersionHash]);
+                }
             }
-            
+
         }
     ]
     

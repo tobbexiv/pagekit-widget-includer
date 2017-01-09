@@ -84,6 +84,32 @@ module.exports = {
             }
 
             return widgetInfo;
+        },
+
+        encodeHTML: function (stringToEncode) {
+            // Set the characters to encode.
+            var lo_characters = {
+                '&':    '&amp;',
+                '"':    '&quot;',
+                '\'':   '&apos;',
+                '<':    '&lt;',
+                '>':    '&gt;'
+            };
+
+            return stringToEncode.replace(/([\&"'<>])/g, function(is_string, is_symbol) { return lo_characters[is_symbol]; });
+        },
+
+        decodeHTML: function (stringToDecode) {
+            // Set the characters to decode.
+            var lo_characters = {
+                '&amp;':    '&',
+                '&quot;':   '"',
+                '&apos;':   '\'',
+                '&lt;':     '<',
+                '&gt;':     '>'
+            };
+
+            return stringToDecode.replace(/(&quot;|&apos;|&lt;|&gt;|&amp;)/g, function(is_string, is_symbol) { return lo_characters[is_symbol]; });
         }
 
     }

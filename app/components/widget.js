@@ -6,6 +6,12 @@ module.exports = {
 
     plugin: true,
 
+    data: function () {
+        return {
+            helper: this.$parent.$options.utils['widget-helper'].methods
+        };
+    },
+
     created: function () {
         var vm = this, editor = this.$parent.editor;
 
@@ -60,7 +66,7 @@ module.exports = {
                 };
             }
 
-            new this.$options.utils['widget-picker']({
+            new this.$parent.$options.utils['widget-picker']({
                 parent: this,
                 data: {
                     widget: widget
@@ -68,32 +74,11 @@ module.exports = {
             }).$mount()
                 .$appendTo('body')
                 .$on('select', function (widget) {
-                    var content;
-                    var options = {};
+                    var content, widgetInfo;
 
-                    options.id = parseInt(widget.id);
+                    widgetInfo = this.helper.widgetInfoFromPickerSelection(widget)
 
-                    if(!!widget.data.comment === true) {
-                        options.comment = widget.data.comment;
-                    }
-
-                    if(widget.data.hideTitle === true) {
-                        options.hideTitle = true;
-                    }
-
-                    if(parseInt(widget.data.titleSize) > 0 && parseInt(widget.data.titleSize) < 6 && parseInt(widget.data.titleSize) !== 4) {
-                        options.titleSize = parseInt(widget.data.titleSize) + '';
-                    }
-
-                    if(!!widget.data.title === true) {
-                        options.title = widget.data.title;
-                    }
-
-                    if(widget.data.renderPlaceholder === false) {
-                        options.renderPlaceholder = false;
-                    }
-
-                    content = '(widget)' + JSON.stringify(options);
+                    content = '(widget)' + JSON.stringify(widgetInfo);
 
                     widget.replace(content);
                 });
@@ -108,29 +93,15 @@ module.exports = {
                 // Parsing fails -> just assume nothing was entered and keep the default values.
             }
 
-            if(parseInt(parsed.id) > 0) {
-                data.id = parseInt(parsed.id);
+            widget = this.helper.flatToNestedWidgetInfo(parsed);
+
+            if(widget.id) {
+                data.id = widget.id;
             }
 
-            data.data = {};
-
-            if(parsed.hideTitle === true) {
-                data.data.hideTitle = true;
+            if(widget.data) {
+                data.data = widget.data
             }
-
-            if(parseInt(parsed.titleSize) > 0 && parseInt(parsed.titleSize) < 10) {
-                data.data.titleSize = parseInt(parsed.titleSize);
-            }
-
-            if(!!parsed.title === true) {
-                data.data.title = parsed.title;
-            }
-
-            if(!!parsed.comment === true) {
-                data.data.comment = parsed.comment;
-            }
-
-            data.data.renderPlaceholder = parsed.renderPlaceholder !== false;
 
             return '<widget-preview index="' + index + '"></widget-preview>';
         }
@@ -139,12 +110,10 @@ module.exports = {
 
     components: {
         'widget-preview': require('./widget-preview.vue')
-    },
-
-    utils: {
-        'widget-picker': Vue.extend(require('./widget-picker.vue'))
     }
 
 };
 
 window.Editor.components['plugin-widget'] = module.exports;
+window.Editor.utils['widget-picker'] = Vue.extend(require('./widget-picker.vue'));
+window.Editor.utils['widget-helper'] = require('./widget-helper.js');

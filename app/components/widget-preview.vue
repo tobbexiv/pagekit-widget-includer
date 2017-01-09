@@ -30,8 +30,7 @@
         props: ['index'],
 
         created: function () {
-            var data = this.widget.data;
-            data.id = this.widget.id;
+            var data = this.$parent.helper.nestedToFlatWidgetInfo(this.widget);
 
             this.$set('widgetState', this.WIDGET_STATE.LOADING);
 
@@ -44,7 +43,7 @@
                     this.$set('widgetState', this.WIDGET_STATE.ACCESS_DENIED);
                 } else if (res.data.disabled === true) {
                     this.$set('widgetState', this.WIDGET_STATE.DISABLED);
-                } else if (this.widget.data.renderPlaceholder === true) {
+                } else if (data.renderPlaceholder === true) {
                     this.$set('widgetState', this.WIDGET_STATE.RENDER_PLACEHOLDER);
                 } else {
                     this.$set('widgetState', this.WIDGET_STATE.LOADED);

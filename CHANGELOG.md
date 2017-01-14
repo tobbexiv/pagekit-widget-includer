@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 (January 1st, 2017)
+## 1.0.0 (January 9th, 2017)
 
 ### Added
 - Editor plugin for TinyMCE editor.

@@ -22,7 +22,7 @@ module.exports = {
         this.widgets = [];
 
         editor.addButton('widget', {
-            title: 'Widget',
+            title: this.$trans('Widget'),
             label: '<i class="uk-icon-puzzle-piece"></i>'
         });
 

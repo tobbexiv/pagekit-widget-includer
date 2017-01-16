@@ -69,7 +69,7 @@ module.exports = {
             };
 
             editor.addButton('widgetPicker', {
-                tooltip: 'Insert/edit widget',
+                tooltip: vm.$trans('Insert/edit widget'),
                 icon: 'none uk-icon-puzzle-piece" style="font-family: FontAwesome;', // We need to specify FontAwesome explicitly as tinymce overwrites the font family.
                 onclick: showDialog
             });
@@ -79,7 +79,7 @@ module.exports = {
             }, 'widgetPicker');
 
             editor.addMenuItem('widgetPicker', {
-                text: 'Insert/edit widget',
+                text: vm.$trans('Insert/edit widget'),
                 icon: 'none uk-icon-puzzle-piece" style="font-family: FontAwesome;', // We need to specify FontAwesome explicitly as tinymce overwrites the font family.
                 context: 'insert',
                 onclick: showDialog

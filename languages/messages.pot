@@ -1,0 +1,77 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pagekit 1.0.10 (tobbe/widget-includer, messages)\n"
+"POT-Creation-Date: 2017-01-16 21:49+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Widget placeholder."
+msgstr ""
+
+msgid "Widget id: %widgetId%"
+msgstr ""
+
+msgid "Widget comment: %comment%"
+msgstr ""
+
+msgid "Add Widget"
+msgstr ""
+
+msgid "There was an error loading the widget!"
+msgstr ""
+
+msgid "Loading widget ..."
+msgstr ""
+
+msgid "Widget does not exist!"
+msgstr ""
+
+msgid "You are not authorized to see this widget!"
+msgstr ""
+
+msgid "Widget is disabled!"
+msgstr ""
+
+msgid "Id"
+msgstr ""
+
+msgid "This widget is disabled. No one will be able to see it."
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Render placeholder instead of content in preview"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "This comment is displayed in the editor, but not evaluated by the widget. So you can enter information which helps you to identify the widget."
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Hide Title"
+msgstr ""
+
+msgid "Title Size"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Insert/edit widget"
+msgstr ""
+
+msgid "Widget"
+msgstr ""
+

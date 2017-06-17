@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 1.0.10 (tobbe/widget-includer, messages)\n"
-"POT-Creation-Date: 2017-01-16 21:49+0000\n"
+"Project-Id-Version: Pagekit 1.0.11 (tobbe/widget-includer, messages)\n"
+"POT-Creation-Date: 2017-06-17 13:45+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,5 +73,8 @@ msgid "Insert/edit widget"
 msgstr ""
 
 msgid "Widget"
+msgstr ""
+
+msgid "Use the widget includer editor plugin"
 msgstr ""
 

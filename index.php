@@ -14,7 +14,7 @@ return [
 
     'permissions' => [
         'widgetincluder: use editor plugin' => [
-            'title' => _('Use the widget includer editor plugin')
+            'title' => 'Use the widget includer editor plugin'
         ]
     ],
 

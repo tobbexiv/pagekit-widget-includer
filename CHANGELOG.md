@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0 (June 18th, 2017)
+
+### Added
+- Translations (EN, DE, NL)
+
+### Fixed
+- Dump due to usage of undefined function function.
+
 ## 1.0.0 (January 9th, 2017)
 
 ### Added

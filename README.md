@@ -2,7 +2,7 @@
 
 This extension enables you to include widgets anywhere in your content. You can find it in the [pagekit marketplace](https://pagekit.com/marketplace/package/tobbe/widget-includer).
 
-##Features
+## Features
 
 - Include widgets anywhere.
 - Plugin for the default editor to easily select widgets.

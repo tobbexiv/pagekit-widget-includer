@@ -34,7 +34,7 @@ return [
     ],
     
     'events' => [
-        'view.scripts' => function ($event, $scripts) use ($app) {
+        'view.scripts' => [function ($event, $scripts) use ($app) {
 
             $packageVersion = $app->config('system')->get('packages.tobbe/widget-includer');
             $packageVersionHash = substr(sha1($app->system()->config('secret') . $packageVersion), 0, 4);
@@ -47,7 +47,7 @@ return [
                 }
             }
 
-        }
+        }, 10]
     ]
     
 ];

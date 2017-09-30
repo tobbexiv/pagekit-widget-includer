@@ -1,12 +1,20 @@
 # Changelog
 
+## 1.1.1 (September 30th, 2017)
+
+### Added
+- Translations (FR)
+
+### Fixed
+- TinyMCE plugin does not work if TinyMCE is installed prior to the widget includer.
+
 ## 1.1.0 (June 18th, 2017)
 
 ### Added
 - Translations (EN, DE, NL)
 
 ### Fixed
-- Dump due to usage of undefined function function.
+- Dump due to usage of undefined function.
 
 ## 1.0.0 (January 9th, 2017)
 
